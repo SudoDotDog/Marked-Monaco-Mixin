@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/marked-monaco-mixin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Mixin Helpers for Marked Monaco",
   "repository": {
     "type": "git",

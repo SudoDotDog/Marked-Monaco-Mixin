@@ -10,7 +10,7 @@ import { wrapExportsForProvide } from "./provide";
 
 export class MarkedMonacoExportsMixinFactory {
 
-    public static fromDeclaration(
+    public static fromExports(
         moduleName: string,
         exports: Record<string, string>,
     ): MarkedMonacoExportsMixinFactory {
