@@ -32,7 +32,7 @@ export class MarkedMonacoExportsMixinFactory {
 
     public createInjectMixin(variableName: string): MarkedMonacoMixin {
 
-        return (manager: IMarkedMonacoManager) => {
+        return (manager: IMarkedMonacoManager): void => {
 
             const languageServer: LanguageServerDefaults
                 = manager.getLanguageServerDefaults();
@@ -41,14 +41,12 @@ export class MarkedMonacoExportsMixinFactory {
                 wrapExportsForInject(variableName, this._exports),
                 `inject-${this._moduleName}.d.ts`,
             );
-
-            return;
         };
     }
 
     public createProvideMixin(moduleName: string): MarkedMonacoMixin {
 
-        return (manager: IMarkedMonacoManager) => {
+        return (manager: IMarkedMonacoManager): void => {
 
             const languageServer: LanguageServerDefaults
                 = manager.getLanguageServerDefaults();
@@ -57,8 +55,6 @@ export class MarkedMonacoExportsMixinFactory {
                 wrapExportsForProvide(moduleName, this._exports),
                 `provide-${this._moduleName}.d.ts`,
             );
-
-            return;
         };
     }
 }
