@@ -15,7 +15,7 @@ export const wrapExportsForInject = (
     const parsedExports: string[] = Object
         .entries(exports)
         .map(([key, value]: [string, string]) => {
-            return `${key}: ${value},`;
+            return `${key}: ${value};`;
         });
 
     return [
