@@ -1,28 +1,33 @@
 /**
  * @author WMXPY
- * @namespace MarkedMonacoMixin
+ * @namespace Exports
  * @description Factory
  */
 
 import { IMarkedMonacoManager, LanguageServerDefaults, MarkedMonacoMixin } from "@sudoo/marked-monaco";
+import { wrapExportsForInject } from "./inject";
+import { wrapExportsForProvide } from "./provide";
 
-export class MarkedMonacoMixinFactory {
+export class MarkedMonacoExportsMixinFactory {
 
     public static fromDeclaration(
         moduleName: string,
-        declaration: string,
-    ): MarkedMonacoMixinFactory {
+        exports: Record<string, string>,
+    ): MarkedMonacoExportsMixinFactory {
 
-        return new MarkedMonacoMixinFactory(moduleName, declaration);
+        return new MarkedMonacoExportsMixinFactory(moduleName, exports);
     }
 
     private readonly _moduleName: string;
-    private readonly _declaration: string;
+    private readonly _exports: Record<string, string>;
 
-    private constructor(moduleName: string, declaration: string) {
+    private constructor(
+        moduleName: string,
+        exports: Record<string, string>,
+    ) {
 
         this._moduleName = moduleName;
-        this._declaration = declaration;
+        this._exports = exports;
     }
 
     public createInjectMixin(variableName: string): MarkedMonacoMixin {
@@ -33,8 +38,8 @@ export class MarkedMonacoMixinFactory {
                 = manager.getLanguageServerDefaults();
 
             languageServer.addExtraLib(
-                this._declaration,
-                variableName,
+                wrapExportsForInject(variableName, this._exports),
+                `inject-${this._moduleName}.d.ts`,
             );
 
             return;
@@ -49,8 +54,8 @@ export class MarkedMonacoMixinFactory {
                 = manager.getLanguageServerDefaults();
 
             languageServer.addExtraLib(
-                this._declaration,
-                moduleName,
+                wrapExportsForProvide(moduleName, this._exports),
+                `provide-${this._moduleName}.d.ts`,
             );
 
             return;

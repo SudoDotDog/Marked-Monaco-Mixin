@@ -4,7 +4,7 @@
  * @description Index
  */
 
-export * from "./factory";
-export * from "./inject";
-export * from "./provide";
+export * from "./exports/factory";
+export * from "./exports/inject";
+export * from "./exports/provide";
 
