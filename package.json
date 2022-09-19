@@ -13,11 +13,14 @@
   },
   "homepage": "https://github.com/SudoDotDog/Sudoo-Marked-Monaco-Mixin#readme",
   "peerDependencies": {
-    "@sudoo/marked": "*"
+    "@sudoo/marked": "*",
+    "@sudoo/marked-monaco": "*"
   },
   "devDependencies": {
     "@sudoo/marked": "^3.9.4",
-    "@sudoo/triforce": "^3.8.0"
+    "@sudoo/marked-monaco": "^1.0.0",
+    "@sudoo/triforce": "^3.8.0",
+    "monaco-editor": "^0.34.0"
   },
   "nyc": {
     "extension": [
