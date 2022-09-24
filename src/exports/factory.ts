@@ -31,7 +31,10 @@ export class MarkedMonacoExportsMixinFactory implements IMarkedMonacoMixinFactor
         this._exports = exports;
     }
 
-    public createInjectMixin(variableName: string): MarkedMonacoMixin {
+    public createInjectMixin(
+        variableName: string,
+        declareFileName: string = `inject-${this._moduleName}.d.ts`,
+    ): MarkedMonacoMixin {
 
         return (manager: IMarkedMonacoManager): void => {
 
@@ -40,12 +43,15 @@ export class MarkedMonacoExportsMixinFactory implements IMarkedMonacoMixinFactor
 
             languageServer.addExtraLib(
                 wrapExportsForMonacoMixinInject(variableName, this._exports),
-                `inject-${this._moduleName}.d.ts`,
+                declareFileName,
             );
         };
     }
 
-    public createProvideMixin(moduleName: string): MarkedMonacoMixin {
+    public createProvideMixin(
+        moduleName: string,
+        declareFileName: string = `provide-${this._moduleName}.d.ts`,
+    ): MarkedMonacoMixin {
 
         return (manager: IMarkedMonacoManager): void => {
 
@@ -54,7 +60,7 @@ export class MarkedMonacoExportsMixinFactory implements IMarkedMonacoMixinFactor
 
             languageServer.addExtraLib(
                 wrapExportsForMonacoMixinProvide(moduleName, this._exports),
-                `provide-${this._moduleName}.d.ts`,
+                declareFileName,
             );
         };
     }
