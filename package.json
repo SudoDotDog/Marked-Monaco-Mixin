@@ -17,7 +17,7 @@
     "@sudoo/marked-monaco": "*"
   },
   "devDependencies": {
-    "@sudoo/marked": "^3.10.0",
+    "@sudoo/marked": "^3.14.0",
     "@sudoo/marked-monaco": "^1.4.0",
     "@sudoo/triforce": "^3.8.0",
     "monaco-editor": "^0.34.0"
