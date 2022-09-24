@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Class
- * @description Default Provide
+ * @description Named Provide
  * @override Unit Test
  */
 
@@ -9,14 +9,15 @@
 import { New_Line_Character } from "@sudoo/marked";
 import { expect } from "chai";
 import * as Chance from "chance";
-import { MarkedMonacoClassMixinOption, wrapClassForMonacoMixinDefaultProvide } from "../../../src";
+import { MarkedMonacoClassMixinOption } from "../../../src";
+import { wrapClassForMonacoMixinNamedProvide } from "../../../src/class/named-provide";
 
-describe('Given [Default Provide] helper methods of Class', (): void => {
+describe('Given [Named Provide] helper methods of Class', (): void => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const chance: Chance.Chance = new Chance('class-default-provide');
+    const chance: Chance.Chance = new Chance('class-named-provide');
 
-    it('should be able to create declare for default provide class', (): void => {
+    it('should be able to create declare for named provide class', (): void => {
 
         const option: MarkedMonacoClassMixinOption = {
 
@@ -31,11 +32,11 @@ describe('Given [Default Provide] helper methods of Class', (): void => {
             },
         };
 
-        const declareString: string = wrapClassForMonacoMixinDefaultProvide("Test", option);
+        const declareString: string = wrapClassForMonacoMixinNamedProvide("Test", "ClassName", option);
 
         expect(declareString).to.be.deep.equal([
             `declare module "Test" {`,
-            "export default class {",
+            "export class ClassName {",
             "constructor (key: string): string;",
             "static staticTestValue: string;",
             "static staticTestMethod: (key: string) => string;",

@@ -9,6 +9,7 @@ import { IMarkedMonacoMixinFactory } from "../declare";
 import { MarkedMonacoClassMixinOption } from "./declare";
 import { wrapClassForMonacoMixinDefaultProvide } from "./default-provide";
 import { wrapClassForMonacoMixinInject } from "./inject";
+import { wrapClassForMonacoMixinNamedProvide } from "./named-provide";
 
 export class MarkedMonacoClassMixinFactory implements IMarkedMonacoMixinFactory {
 
@@ -61,6 +62,28 @@ export class MarkedMonacoClassMixinFactory implements IMarkedMonacoMixinFactory 
 
             languageServer.addExtraLib(
                 wrapClassForMonacoMixinDefaultProvide(moduleName, this._option),
+                declareFileName,
+            );
+        };
+    }
+
+    public createNamedProvideMixin(
+        moduleName: string,
+        variableName: string,
+        declareFileName: string = `provide-${this._moduleName}.d.ts`,
+    ): MarkedMonacoMixin {
+
+        return (manager: IMarkedMonacoManager): void => {
+
+            const languageServer: LanguageServerDefaults
+                = manager.getLanguageServerDefaults();
+
+            languageServer.addExtraLib(
+                wrapClassForMonacoMixinNamedProvide(
+                    moduleName,
+                    variableName,
+                    this._option,
+                ),
                 declareFileName,
             );
         };
