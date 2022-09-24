@@ -7,7 +7,7 @@
 // eslint-disable-next-line camelcase
 import { New_Line_Character } from "@sudoo/marked";
 
-export const wrapExportsForInject = (
+export const wrapExportsForMonacoMixinInject = (
     variableName: string,
     exports: Record<string, string>,
 ): string => {

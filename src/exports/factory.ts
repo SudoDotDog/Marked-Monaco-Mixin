@@ -5,10 +5,11 @@
  */
 
 import { IMarkedMonacoManager, LanguageServerDefaults, MarkedMonacoMixin } from "@sudoo/marked-monaco";
-import { wrapExportsForInject } from "./inject";
-import { wrapExportsForProvide } from "./provide";
+import { IMarkedMonacoMixinFactory } from "../declare";
+import { wrapExportsForMonacoMixinInject } from "./inject";
+import { wrapExportsForMonacoMixinProvide } from "./provide";
 
-export class MarkedMonacoExportsMixinFactory {
+export class MarkedMonacoExportsMixinFactory implements IMarkedMonacoMixinFactory {
 
     public static fromExports(
         moduleName: string,
@@ -38,7 +39,7 @@ export class MarkedMonacoExportsMixinFactory {
                 = manager.getLanguageServerDefaults();
 
             languageServer.addExtraLib(
-                wrapExportsForInject(variableName, this._exports),
+                wrapExportsForMonacoMixinInject(variableName, this._exports),
                 `inject-${this._moduleName}.d.ts`,
             );
         };
@@ -52,7 +53,7 @@ export class MarkedMonacoExportsMixinFactory {
                 = manager.getLanguageServerDefaults();
 
             languageServer.addExtraLib(
-                wrapExportsForProvide(moduleName, this._exports),
+                wrapExportsForMonacoMixinProvide(moduleName, this._exports),
                 `provide-${this._moduleName}.d.ts`,
             );
         };

@@ -4,6 +4,7 @@
  * @description Index
  */
 
+export * from "./declare";
 export * from "./exports/factory";
 export * from "./exports/inject";
 export * from "./exports/provide";
