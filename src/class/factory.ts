@@ -6,6 +6,7 @@
 
 import { IMarkedMonacoManager, LanguageServerDefaults, MarkedMonacoMixin } from "@sudoo/marked-monaco";
 import { IMarkedMonacoMixinFactory } from "../declare";
+import { MarkedMonacoClassMixinOption } from "./declare";
 import { wrapClassForMonacoMixinInject } from "./inject";
 import { wrapClassForMonacoMixinProvide } from "./provide";
 
@@ -13,22 +14,22 @@ export class MarkedMonacoClassMixinFactory implements IMarkedMonacoMixinFactory 
 
     public static fromElements(
         moduleName: string,
-        elements: Record<string, string>,
+        option: MarkedMonacoClassMixinOption,
     ): MarkedMonacoClassMixinFactory {
 
-        return new MarkedMonacoClassMixinFactory(moduleName, elements);
+        return new MarkedMonacoClassMixinFactory(moduleName, option);
     }
 
     private readonly _moduleName: string;
-    private readonly _elements: Record<string, string>;
+    private readonly _option: MarkedMonacoClassMixinOption;
 
     private constructor(
         moduleName: string,
-        elements: Record<string, string>,
+        option: MarkedMonacoClassMixinOption,
     ) {
 
         this._moduleName = moduleName;
-        this._elements = elements;
+        this._option = option;
     }
 
     public createInjectMixin(
@@ -42,7 +43,7 @@ export class MarkedMonacoClassMixinFactory implements IMarkedMonacoMixinFactory 
                 = manager.getLanguageServerDefaults();
 
             languageServer.addExtraLib(
-                wrapClassForMonacoMixinInject(variableName, this._elements),
+                wrapClassForMonacoMixinInject(variableName, this._option),
                 declareFileName,
             );
         };
@@ -59,7 +60,7 @@ export class MarkedMonacoClassMixinFactory implements IMarkedMonacoMixinFactory 
                 = manager.getLanguageServerDefaults();
 
             languageServer.addExtraLib(
-                wrapClassForMonacoMixinProvide(moduleName, this._elements),
+                wrapClassForMonacoMixinProvide(moduleName, this._option),
                 declareFileName,
             );
         };
