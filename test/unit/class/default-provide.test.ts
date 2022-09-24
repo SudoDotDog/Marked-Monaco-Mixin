@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Class
- * @description Inject
+ * @description Provide
  * @override Unit Test
  */
 
@@ -9,14 +9,14 @@
 import { New_Line_Character } from "@sudoo/marked";
 import { expect } from "chai";
 import * as Chance from "chance";
-import { MarkedMonacoClassMixinOption, wrapClassForMonacoMixinInject } from "../../../src";
+import { MarkedMonacoClassMixinOption, wrapClassForMonacoMixinDefaultProvide } from "../../../src";
 
-describe('Given [Inject] helper methods of Class', (): void => {
+describe('Given [Provide] helper methods of Class', (): void => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const chance: Chance.Chance = new Chance('class-inject');
+    const chance: Chance.Chance = new Chance('class-provide');
 
-    it('should be able to create declare for inject class', (): void => {
+    it('should be able to create declare for provide class', (): void => {
 
         const option: MarkedMonacoClassMixinOption = {
 
@@ -31,15 +31,17 @@ describe('Given [Inject] helper methods of Class', (): void => {
             },
         };
 
-        const declareString: string = wrapClassForMonacoMixinInject("Test", option);
+        const declareString: string = wrapClassForMonacoMixinDefaultProvide("Test", option);
 
         expect(declareString).to.be.deep.equal([
-            "declare class Test {",
+            `declare module "Test" {`,
+            "export default class {",
             "constructor (key: string): string;",
             "static staticTestValue: string;",
             "static staticTestMethod: (key: string) => string;",
             "instanceTestValue: string;",
             "instanceTestMethod: (key: string) => string;",
+            "}",
             "}",
         ].join(New_Line_Character));
     });

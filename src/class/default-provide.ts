@@ -1,17 +1,26 @@
 /**
  * @author WMXPY
  * @namespace Class
- * @description Provide
+ * @description Default Provide
  */
 
 // eslint-disable-next-line camelcase
 import { New_Line_Character } from "@sudoo/marked";
 import { MarkedMonacoClassMixinOption } from "./declare";
 
-export const wrapClassForMonacoMixinProvide = (
+export const wrapClassForMonacoMixinDefaultProvide = (
     moduleName: string,
     option: MarkedMonacoClassMixinOption,
 ): string => {
+
+    const parsedConstructor: string[] = typeof option.constructor === 'string'
+        ? [
+            `constructor ${option.constructor};`,
+        ]
+        : option.constructor
+            .map((each: string) => {
+                return `constructor ${each};`;
+            });
 
     const parsedStaticExports: string[] = Object
         .entries(option.staticElements)
@@ -26,10 +35,12 @@ export const wrapClassForMonacoMixinProvide = (
         });
 
     return [
-        `declare class ${moduleName}: {`,
-        `constructor ${option.constructor};`,
+        `declare module "${moduleName}" {`,
+        `export default class {`,
+        ...parsedConstructor,
         ...parsedStaticExports,
         ...parsedInstanceExports,
+        `}`,
         `}`,
     ].join(New_Line_Character);
 };

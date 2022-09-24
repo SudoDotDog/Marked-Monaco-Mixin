@@ -6,7 +6,7 @@
 
 export type MarkedMonacoClassMixinOption = {
 
-    readonly constructor: string;
+    readonly constructor: string | string[];
     readonly staticElements: Record<string, string>;
     readonly instanceElements: Record<string, string>;
 };

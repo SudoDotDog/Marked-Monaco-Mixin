@@ -7,8 +7,8 @@
 import { IMarkedMonacoManager, LanguageServerDefaults, MarkedMonacoMixin } from "@sudoo/marked-monaco";
 import { IMarkedMonacoMixinFactory } from "../declare";
 import { MarkedMonacoClassMixinOption } from "./declare";
+import { wrapClassForMonacoMixinDefaultProvide } from "./default-provide";
 import { wrapClassForMonacoMixinInject } from "./inject";
-import { wrapClassForMonacoMixinProvide } from "./provide";
 
 export class MarkedMonacoClassMixinFactory implements IMarkedMonacoMixinFactory {
 
@@ -60,7 +60,7 @@ export class MarkedMonacoClassMixinFactory implements IMarkedMonacoMixinFactory 
                 = manager.getLanguageServerDefaults();
 
             languageServer.addExtraLib(
-                wrapClassForMonacoMixinProvide(moduleName, this._option),
+                wrapClassForMonacoMixinDefaultProvide(moduleName, this._option),
                 declareFileName,
             );
         };

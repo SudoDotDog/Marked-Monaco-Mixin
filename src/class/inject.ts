@@ -13,6 +13,15 @@ export const wrapClassForMonacoMixinInject = (
     option: MarkedMonacoClassMixinOption,
 ): string => {
 
+    const parsedConstructor: string[] = typeof option.constructor === 'string'
+        ? [
+            `constructor ${option.constructor};`,
+        ]
+        : option.constructor
+            .map((each: string) => {
+                return `constructor ${each};`;
+            });
+
     const parsedStaticExports: string[] = Object
         .entries(option.staticElements)
         .map(([key, value]: [string, string]) => {
@@ -26,8 +35,8 @@ export const wrapClassForMonacoMixinInject = (
         });
 
     return [
-        `declare class ${variableName}: {`,
-        `constructor ${option.constructor};`,
+        `declare class ${variableName} {`,
+        ...parsedConstructor,
         ...parsedStaticExports,
         ...parsedInstanceExports,
         `}`,
