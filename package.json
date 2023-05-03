@@ -20,7 +20,7 @@
     "@sudoo/marked": "^3.17.0",
     "@sudoo/marked-monaco": "^1.4.0",
     "@sudoo/triforce": "^3.11.0",
-    "monaco-editor": "^0.37.1"
+    "monaco-editor": "^0.38.0"
   },
   "nyc": {
     "extension": [
