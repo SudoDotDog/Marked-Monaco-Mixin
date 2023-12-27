@@ -19,7 +19,7 @@
   "devDependencies": {
     "@sudoo/marked": "^3.21.4",
     "@sudoo/marked-monaco": "^1.4.0",
-    "@sudoo/triforce": "^3.11.0",
+    "@sudoo/triforce": "^3.12.0",
     "monaco-editor": "^0.45.0"
   },
   "nyc": {
